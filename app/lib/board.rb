@@ -28,10 +28,33 @@ module SinatraMind
       @hint_array[y][x]
     end
 
+    def split_input(input:)
+      input = input.to_s.split(//) unless input.is_a? Array
+
+      input
+    end
+
     def update_guesses(input:, row:)
-      input.each_with_index do |index, num|
-        color = Colors::COLORS[num]
+      input = split_input(input: input)
+      input.each_with_index do |num, index|
+        color = Colors::COLORS[num.to_i]
         guess_cell(x: index, y: row).value = color
+      end
+    end
+
+    def update_hints(input:, row:)
+      input = split_input(input: input)
+      input.each_with_index do |num, index|
+        color = Colors::HINTS[num.to_i]
+        hint_cell(x: index, y: row).value = color
+      end
+    end
+
+    def print_board
+      12.times do |index|
+        @guess_array[index].each { |cell| print cell.value.to_s + ', ' }
+        print '|'
+        @hint_array[index].each { |cell| print cell.value.to_s + ', ' }
       end
     end
 

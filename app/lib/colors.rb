@@ -9,6 +9,12 @@ module SinatraMind
       purple: 4,
       yellow: 5,
       orange: 6
-    }.freeze
+    }.invert.freeze
+
+    HINTS = {
+      blank_bullet: 0,
+      white: 1,
+      black: 2
+    }.invert.freeze
   end
 end

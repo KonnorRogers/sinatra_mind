@@ -1,0 +1,34 @@
+# frozen_string_literal: true
+
+module SinatraMind
+  class Player
+    def get_input(input: nil)
+      loop do
+        input = input_to_array(input: input) unless input.is_a? Array
+        break if good_input?(input: input)
+
+        input = gets.chomp
+      end
+
+      input
+    end
+
+    def good_input?(input:)
+      return false if input.nil?
+      return false if input.size != 4
+
+      input = input_to_array(input: input) unless input.is_a?(Array)
+      return false if input.any? { |num| num < 1 || num > 6 }
+
+      true
+    end
+
+    private
+
+    def input_to_array(input:)
+      return nil if input.nil?
+
+      input.split(//).map(&:to_i)
+    end
+  end
+end

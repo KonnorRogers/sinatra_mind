@@ -38,10 +38,14 @@ module SinatraMind
     context '#update_guesses(input, row)' do
       it 'updates the guesses on row 2' do
         board.update_guesses(input: 1234, row: 1)
-        expect(board.get_cell(x: 0, y: 1).value).to eq :red
-        expect(board.get_cell(x: 1, y: 1).value).to eq :blue
-        expect(board.get_cell(x: 0, y: 0).value).to eq :blank_circle
+        expect(board.board[:guesses][1][0].value).to eq :red
+        expect(board.guess_cell(x: 0, y: 1).value).to eq :red
+        expect(board.guess_cell(x: 1, y: 1).value).to eq :blue
+        expect(board.guess_cell(x: 0, y: 0).value).to eq :blank_circle
       end
+    end
+
+    context '#update_hints(input, row)' do
     end
   end
 end

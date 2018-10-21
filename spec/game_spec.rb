@@ -12,5 +12,31 @@ module SinatraMind
 
     context '#initialize' do
     end
+
+    context '#hints_input(input:, secret_code:)' do
+      it 'returns appropriate hints' do
+        secret_code = %i[red red red red]
+        input = [1, 2, 3, 1]
+        hints = [2, 0, 0, 2]
+
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+      end
+
+      it 'returns hints again' do
+        secret_code = %i[red blue yellow yellow]
+        input = [2, 3, 5, 5]
+        hints = [1, 0, 2, 2]
+
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+      end
+
+      it 'more tests' do
+        secret_code = %i[red blue blue yellow]
+        input = [2, 5, 5, 2]
+        hints = [1, 1, 0, 1]
+
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+      end
+    end
   end
 end
