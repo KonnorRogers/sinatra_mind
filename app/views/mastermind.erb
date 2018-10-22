@@ -10,7 +10,6 @@
   </head>
   <body>
     <form action="/mastermind" method="get">
-
       <div>
         <label for="input">Guess:</label>
         <input type="text" name="input">
@@ -20,5 +19,10 @@
         <button type="submit">Enter a guess:</button>
       </div>
     </form>
+
+    <div>
+      <%= @guesses %> <%= @hints %>
+    </div>
   </body>
 </html>
+

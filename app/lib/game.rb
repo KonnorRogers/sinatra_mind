@@ -4,7 +4,8 @@ module SinatraMind
   class Game
     MAX_GUESSES = 12
 
-    attr_reader :player, :num_guesses, :secret_code, :board
+    attr_reader :player, :num_guesses, :secret_code,
+                :board, :colors, :win, :loss
 
     def initialize(player: add_player)
       @player = player
@@ -13,8 +14,7 @@ module SinatraMind
       @colors = Colors::COLORS
       @secret_code = random_code
       @win = false
-      @feedback = []
-      @guesses = []
+      @loss = false
     end
 
     def reset
@@ -25,6 +25,20 @@ module SinatraMind
       @win = false
     end
 
+    # For web browsing
+    def take_turn(input:)
+      input = @player.good_input?(input: input)
+      correct_guess?(input: input)
+      return true if game_over?
+
+      @board.update_guesses(input: input, row: @num_guesses)
+      hints_ary = hints_input(ary: input)
+      @board.update_hints(input: hints_ary, row: @num_guesses)
+
+      @num_guesses += 1
+    end
+
+    # for CLI
     def play
       loop do
         # @board.print_board
@@ -33,14 +47,7 @@ module SinatraMind
         # p @board
         input = @player.get_input
 
-        correct_guess?(input: input)
-        break if game_over?
-
-        @board.update_guesses(input: input, row: @num_guesses)
-        hints_ary = hints_input(ary: input)
-        @board.update_hints(input: hints_ary, row: @num_guesses)
-
-        @num_guesses += 1
+        take_turn(input: input)
       end
     end
 
@@ -121,7 +128,7 @@ module SinatraMind
     end
 
     def loss?
-      return true if @num_guesses > MAX_GUESSES
+      return @loss = true if @num_guesses > MAX_GUESSES
 
       false
     end

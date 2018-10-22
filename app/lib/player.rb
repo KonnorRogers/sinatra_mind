@@ -20,7 +20,7 @@ module SinatraMind
       input = input_to_array(input: input) unless input.is_a?(Array)
       return false if input.any? { |num| num < 1 || num > 6 }
 
-      true
+      input
     end
 
     private
