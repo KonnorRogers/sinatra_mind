@@ -17,6 +17,7 @@ get '/mastermind' do
 
   @input = params['input']
   session[:array] << @input
+  @array = session[:array]
   session[:game].take_turn(input: @input) unless @input.nil?
 
   erb :mastermind
