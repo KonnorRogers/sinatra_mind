@@ -22,23 +22,8 @@
 
     <div>
       <%=
-        input
-      %>
-    </div>
-
-    <div>
-      <%=
-          array
-      %>
-
-    <%=
-        guess = []
-        guesses.each do |ary|
-          ary.each { |cell| guess << cell.value.to_s }
-        end
-
-        guess
-      %>
+        @input
+        %>
     </div>
   </body>
 </html>
