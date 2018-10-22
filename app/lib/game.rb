@@ -28,7 +28,7 @@ module SinatraMind
     # For web browsing
     def take_turn(input:)
       input = @player.good_input?(input: input)
-      return false unless correct_guess?(input: input)
+      correct_guess?(input: input, web: true)
       return true if game_over?
 
       @board.update_guesses(input: input, row: @num_guesses)
@@ -108,8 +108,9 @@ module SinatraMind
       Array.new(4) { @colors[@colors.keys.sample] }
     end
 
-    def correct_guess?(input:)
-      input = @player.get_input(input: input)
+    def correct_guess?(input:, web: false)
+      input = @player.get_input(input: input) if web == false
+      input = @player.good_input?(input: input) if web == true
 
       return false if input == false
       return @win = true if convert_to_syms(ary: input) == @secret_code

@@ -15,9 +15,11 @@ module SinatraMind
 
     def good_input?(input:)
       return false if input.nil? || input == false
-      return false if input.size != 4
 
       input = input_to_array(input: input) unless input.is_a?(Array)
+
+      return false if input == false
+      return false if input.size != 4
       return false if input.any? { |num| num < 1 || num > 6 }
 
       input
@@ -26,7 +28,7 @@ module SinatraMind
     private
 
     def input_to_array(input:)
-      return nil if input.nil?
+      return false if input.nil? || input == false
 
       input.split(//).map(&:to_i)
     end

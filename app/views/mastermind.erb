@@ -16,12 +16,29 @@
       </div>
       
       <div class="button">
-        <button type="submit">Enter a guess:</button>
+        <button type="submit" value="input">Enter a guess:</button>
       </div>
     </form>
 
     <div>
-      <%= @guesses %> <%= @hints %>
+      <%=
+        input
+      %>
+    </div>
+
+    <div>
+      <%=
+          array
+      %>
+
+    <%=
+        guess = []
+        guesses.each do |ary|
+          ary.each { |cell| guess << cell.value.to_s }
+        end
+
+        guess
+      %>
     </div>
   </body>
 </html>

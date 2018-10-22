@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'thin'
@@ -5,19 +7,25 @@ require_relative 'sinatra_mind'
 
 enable :sessions
 
+game = SinatraMind::Game.new
+
 get '/' do
-  redirect '/mastermind' unless session.nil?
+  redirect '/mastermind'
 end
 
 get '/mastermind' do
-  @session = session
-  @session['game'] ||= SinatraMind::Game.new
-  @game = @session['game']
+  session[:game] ||= game
+  session[:array] ||= []
+  @game = session[:game]
 
   @input = params['input']
-  @game.take_turn(input: @input)
-  @guesses = @game.board.board[:guesses]
-  @hints = @game.board.board[:hints]
+  session[:array] << @input
+  session[:game].take_turn(input: @input) unless @input.nil?
 
-  erb :mastermind, local: { game: @game, guesses: @guesses, hints: @hints }
+  erb :mastermind, locals: {
+    game: @game,
+    input: @input,
+    array: session[:array],
+    guesses: @game.board.guess_array
+  }
 end
