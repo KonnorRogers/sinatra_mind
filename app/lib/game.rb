@@ -28,7 +28,7 @@ module SinatraMind
     # For web browsing
     def take_turn(input:)
       input = @player.good_input?(input: input)
-      correct_guess?(input: input)
+      return false unless correct_guess?(input: input)
       return true if game_over?
 
       @board.update_guesses(input: input, row: @num_guesses)

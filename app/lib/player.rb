@@ -14,7 +14,7 @@ module SinatraMind
     end
 
     def good_input?(input:)
-      return false if input.nil?
+      return false if input.nil? || input == false
       return false if input.size != 4
 
       input = input_to_array(input: input) unless input.is_a?(Array)

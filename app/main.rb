@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require './sinatra_mind'
+require 'thin'
+require_relative 'sinatra_mind'
 
 enable :sessions
 
