@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
-require './app/mastermind'
+require 'bundler'
+
+Bundler.require
+
+require './app/main.rb'
 run Sinatra::Application
