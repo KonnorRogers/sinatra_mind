@@ -8,6 +8,7 @@ require 'thin'
 require_relative 'sinatra_mind'
 
 enable :sessions
+set :bind, '0.0.0.0'
 
 get '/' do
   session[:game] ||= SinatraMind::Game.new
