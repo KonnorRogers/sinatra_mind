@@ -26,7 +26,7 @@ module SinatraMind
       end
 
       it 'returns true if input is good' do
-        expect(player.good_input?(input: '2235')).to eq true
+        expect(player.good_input?(input: '2235')).to eq [2, 2, 3, 5]
       end
     end
   end
