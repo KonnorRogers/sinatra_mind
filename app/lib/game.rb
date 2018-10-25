@@ -39,11 +39,11 @@ module SinatraMind
     end
 
     def guesses
-      @board.guesses
+      @board[:guesses]
     end
 
     def hints
-      @board.hints
+      @board[:hints]
     end
 
     # for CLI
