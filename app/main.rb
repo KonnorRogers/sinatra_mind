@@ -11,6 +11,7 @@ enable :sessions
 
 get '/' do
   session[:game] ||= SinatraMind::Game.new
+  session[:array] ||= []
   redirect '/mastermind'
 end
 
