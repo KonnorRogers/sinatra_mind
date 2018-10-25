@@ -9,3 +9,4 @@ task default: :spec
 task :deploy
 task :push
 task :start
+task :ngrok
