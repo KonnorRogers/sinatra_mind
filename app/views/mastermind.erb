@@ -25,9 +25,9 @@
     </div>
 
     <div>
-      <p class="message" id="bad_input"> <%= message if message == :bad_input %> </p>
-      <p class="message" id="win"> <%= message if message == :win %> </p>
-      <p class="message" id="loss"> <%= message if message == :loss %> </p>
+      <p class="message" id="bad_input"> <%= message if message == game.bad_input_message %> </p>
+      <p class="message" id="win"> <%= message if message == game.win_message %> </p>
+      <p class="message" id="loss"> <%= message if message == game.loss_message %> </p>
     </div>
 
     <div>
