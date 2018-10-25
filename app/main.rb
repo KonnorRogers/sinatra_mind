@@ -11,17 +11,29 @@ enable :sessions
 
 get '/' do
   session[:game] ||= SinatraMind::Game.new
-  session[:array] ||= []
   redirect '/mastermind'
 end
 
 get '/mastermind' do
-  @game = session[:game]
+  game = session[:game]
+  input = params['input']
 
-  @input = params['input']
-  session[:array] << @input
-  @array = session[:array]
-  session[:game].take_turn(input: @input) unless @input.nil?
+  good_input = game.take_turn(input: input) unless input.nil?
+  bad_input = game.bad_input_message if good_input == :bad_input
 
-  erb :mastermind
+  guesses = game.guesses
+  turns_left = SinatraMind::Game::MAX_GUESSES - game.num_guesses
+  key = game.key_to_s
+  hints = game.hints
+
+  erb :mastermind, locals: {
+    game: game,
+    input: input,
+    turns_left: turns_left,
+    guesses: guesses,
+    hints: hints,
+    secret_code: game.secret_code,
+    key: key,
+    bad_input: bad_input
+  }
 end

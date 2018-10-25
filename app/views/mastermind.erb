@@ -21,13 +21,29 @@
     </form>
 
     <div>
-      <% @input %>
+      <p class="message"> You gave input of: <%= input %> </p>
+      <p class="message" id="bad_input"> <%= bad_input if bad_input.is_a? String %> </p>
     </div>
 
     <div>
-      <%= @array %>
+      <p class="message" id="guesses"> Previous guesses: <%= guesses %> </p>
     </div>
 
+    <div>
+      <p class="message" id="hints"> Hints: <%= hints %>
+    </div>
+
+    <div>
+      <p class="message" id="turns_left"> Guesses left:<%= turns_left %> </p>
+    </div>
+
+    <div>
+      <p class="message" id="key"> Key: <%= key %> </p>
+    </div>
+
+    <div>
+      <p class="message" id="secret_code"> Secret code: <%= secret_code %> </p>
+    </div>
   </body>
 </html>
 

@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
-require_relative 'colors'
-
 module SinatraMind
   class Game
     MAX_GUESSES = 12
-    KEY = Colors::COLORS
 
     attr_reader :player, :num_guesses, :secret_code,
                 :board, :colors, :win, :loss
 
-    def initialize
-      reset
+    def initialize(player: add_player)
+      @player = player
+      @num_guesses = 0
+      @board = Board.new
+      @colors = Colors::COLORS
+      @secret_code = random_code
+      @win = false
+      @loss = false
     end
 
     def reset
@@ -20,14 +23,11 @@ module SinatraMind
       @num_guesses = 0
       @secret_code = random_code
       @win = false
-      @loss = false
     end
 
     # For web browsing
     def take_turn(input:)
       input = @player.good_input?(input: input)
-      return :bad_input if input == false
-
       correct_guess?(input: input, web: true)
       return true if game_over?
 
@@ -36,21 +36,14 @@ module SinatraMind
       @board.update_hints(input: hints_ary, row: @num_guesses)
 
       @num_guesses += 1
-    end
-
-    def guesses
-      @board.guesses
-    end
-
-    def hints
-      @board.hints
+      :good_input
     end
 
     # for CLI
     def play
       loop do
         # @board.print_board
-        # p KEY
+        # p @colors
         # puts format_s_code
         # p @board
         input = @player.get_input
@@ -70,26 +63,12 @@ module SinatraMind
       @secret_code.map(&:to_s).join(', ')
     end
 
-    def key_to_s
-      f_string = ''
-      KEY.each do |num, color|
-        f_string += "#{num} = #{color}, " unless num >= KEY.size
-        f_string += "#{num} = #{color}" if num == KEY.size
-      end
-      f_string
-    end
-
     def win_message
-      "Congratulations! You have won! You guessed the secret_code correctly\n
-      The correct code was #{format_s_code}"
+      'Congratulations! You have won! You guessed the secret_code correctly'
     end
 
     def loss_message
       "You have lost, the correct code was #{format_s_code}"
-    end
-
-    def bad_input_message
-      'Please provide a 4 digit input with numbers 1-6'
     end
 
     def hints_input(ary:, secret_code: @secret_code)
@@ -127,7 +106,7 @@ module SinatraMind
     private
 
     def random_code
-      Array.new(4) { KEY[KEY.keys.sample] }
+      Array.new(4) { @colors[@colors.keys.sample] }
     end
 
     def correct_guess?(input:, web: false)
@@ -141,7 +120,7 @@ module SinatraMind
     end
 
     def convert_to_syms(ary:)
-      ary.map { |num| KEY[num] }
+      ary.map { |num| @colors[num] }
     end
 
     def win?
