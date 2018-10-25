@@ -22,27 +22,29 @@
 
     <div>
       <p class="message"> You gave input of: <%= input %> </p>
-      <p class="message" id="bad_input"> <%= bad_input if bad_input.is_a? String %> </p>
+      <p class="message" id="bad_input"> <%= message if message == :bad_input %> </p>
+      <p class="message" id="win"> <%= message if message == :win %> </p>
+      <p class="message" id="loss"> <%= message if message == :loss %> </p>
     </div>
 
     <div>
-      <p class="message" id="guesses"> Previous guesses: <%= guesses %> </p>
+      <p class="feedback" id="guesses"> Previous guesses: <%= guesses %> </p>
     </div>
 
     <div>
-      <p class="message" id="hints"> Hints: <%= hints %>
+      <p class="feedback" id="hints"> Hints: <%= hints %>
     </div>
 
     <div>
-      <p class="message" id="turns_left"> Guesses left:<%= turns_left %> </p>
+      <p class="feedback" id="turns_left"> Guesses left:<%= turns_left %> </p>
     </div>
 
     <div>
-      <p class="message" id="key"> Key: <%= key %> </p>
+      <p class="feedback" id="key"> Key: <%= key %> </p>
     </div>
 
     <div>
-      <p class="message" id="secret_code"> Secret code: <%= secret_code %> </p>
+      <p class="feedback" id="secret_code"> Secret code: <%= secret_code %> </p>
     </div>
   </body>
 </html>

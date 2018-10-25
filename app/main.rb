@@ -18,22 +18,24 @@ get '/mastermind' do
   game = session[:game]
   input = params['input']
 
-  good_input = game.take_turn(input: input) unless input.nil?
-  bad_input = game.bad_input_message if good_input == :bad_input
+  message = game.take_turn(input: input)
+  message = game.bad_input_message if message == :bad_input
+  message = game.win_message if message == :win
+  message = game.lose_message if message == :lose
 
-  guesses = game.guesses
+  guesses = game.guesses_to_s
   turns_left = SinatraMind::Game::MAX_GUESSES - game.num_guesses
   key = game.key_to_s
-  hints = game.hints
+  hints = game.hints_to_s
 
   erb :mastermind, locals: {
     game: game,
+    message: message,
     input: input,
     turns_left: turns_left,
     guesses: guesses,
     hints: hints,
     secret_code: game.secret_code,
-    key: key,
-    bad_input: bad_input
+    key: key
   }
 end

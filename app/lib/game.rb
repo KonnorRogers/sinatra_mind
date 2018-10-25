@@ -29,7 +29,7 @@ module SinatraMind
       return :bad_input if input == false
 
       correct_guess?(input: input, web: true)
-      return true if game_over?
+      return game_over? if game_over?
 
       @board.update_guesses(input: input, row: @num_guesses)
       hints_ary = hints_input(ary: input)
@@ -38,12 +38,24 @@ module SinatraMind
       @num_guesses += 1
     end
 
+    def guesses_to_s
+      guesses.map do |ary|
+        ary.map { |cell| cell.value.to_s }
+      end
+    end
+
     def guesses
-      @board[:guesses]
+      @board.board[:guesses]
     end
 
     def hints
-      @board[:hints]
+      @board.board[:hints]
+    end
+
+    def hints_to_s
+      hints.map do |ary|
+        ary.map { |cell| cell.value.to_s }
+      end
     end
 
     # for CLI
@@ -60,8 +72,8 @@ module SinatraMind
     end
 
     def game_over?
-      return true if win?
-      return true if loss?
+      return :win if win?
+      return :loss if loss?
 
       false
     end
