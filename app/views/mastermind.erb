@@ -6,17 +6,22 @@
     
     <title> Mastermind </title>
     
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
   </head>
   <body>
+    <div>
+      <p class="message" id="bad_input"> <%= message if message == game.bad_input_message %> </p>
+      <p class="message" id="win"> <%= game.win_message if game.win? %> </p>
+      <p class="message" id="loss"> <%= game.loss_message if game.loss? %> </p>
+    </div>
+
     <form action="/mastermind" method="get">
       <div>
-        <label for="input">Guess:</label>
-        <input type="text" name="input">
+        <p> <input type="text" name="input"> </p>
       </div>
       
       <div class="button">
-        <button type="submit" value="input">Enter a guess:</button>
+        <button type="submit" value="input">Submit</button>
       </div>
     </form>
 
@@ -25,29 +30,28 @@
     </div>
 
     <div>
-      <p class="message" id="bad_input"> <%= message if message == game.bad_input_message %> </p>
-      <p class="message" id="win"> <%= game.win_message if game.win? %> </p>
-      <p class="message" id="loss"> <%= game.loss_message if game.loss? %> </p>
-    </div>
-
-    <div>
       <p class="message" id="reset_message"> <%= game.reset_message if reset == true %> </p>
     </div>
+    
+    <div id="feedback-wrapped">
+      <div class="feedback">
+        <p>Previous guesses:</p>
+        <p> <%= guesses %> </p>
+      </div>
 
-    <div>
-      <p class="feedback" id="guesses"> Previous guesses: <%= guesses %> </p>
+      <div class="feedback">
+        <p id="hints"> Hints:
+        <p> <%= hints %> </p>
+      </div>
     </div>
 
     <div>
-      <p class="feedback" id="hints"> Hints: <%= hints %>
+      <p id="turns_left"> Guesses left: <%= turns_left %> </p>
     </div>
 
     <div>
-      <p class="feedback" id="turns_left"> Guesses left:<%= turns_left %> </p>
-    </div>
-
-    <div>
-      <p class="feedback" id="key"> Key: <%= key %> </p>
+      <p class="key" id="key"> Key: </p>
+      <p> <%= key %> </p>
     </div>
 
     <div>
