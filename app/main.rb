@@ -16,17 +16,20 @@ end
 
 get '/mastermind' do
   game = session[:game]
+  # resets on next get request
+  game.reset if game.win? || game.loss?
+
   input = params['input']
 
-  message = game.take_turn(input: input)
-  message = game.bad_input_message if message == :bad_input
-  message = game.win_message if message == :win
-  message = game.lose_message if message == :lose
+  feedback = game.take_turn(input: input)
+  message = game.bad_input_message if feedback == :bad_input
 
   guesses = game.guesses_to_s
   turns_left = SinatraMind::Game::MAX_GUESSES - game.num_guesses
   key = game.key_to_s
   hints = game.hints_to_s
+  # used to display reset message, must be checked after the turn is taken.
+  reset = true if game.win? || game.loss?
 
   erb :mastermind, locals: {
     game: game,
@@ -36,6 +39,7 @@ get '/mastermind' do
     guesses: guesses,
     hints: hints,
     secret_code: game.secret_code,
-    key: key
+    key: key,
+    reset: reset
   }
 end

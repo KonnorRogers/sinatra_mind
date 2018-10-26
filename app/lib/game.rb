@@ -92,12 +92,16 @@ module SinatraMind
     end
 
     def win_message
-      "Congratulations! You have won! You guessed the secret_code correctly\n
-      The correct code was #{format_s_code}"
+      'Congratulations! You have won! You guessed the secret code correctly'
     end
 
     def loss_message
-      "You have lost, the correct code was #{format_s_code}"
+      'You have lost!'
+    end
+
+    def reset_message
+      "The correct code was #{format_s_code}.\n
+      The game will reset with your next guess!"
     end
 
     def bad_input_message
@@ -136,6 +140,18 @@ module SinatraMind
       secret_count
     end
 
+    def win?
+      return true if @win == true
+
+      false
+    end
+
+    def loss?
+      return @loss = true if @num_guesses >= MAX_GUESSES
+
+      false
+    end
+
     private
 
     def random_code
@@ -154,18 +170,6 @@ module SinatraMind
 
     def convert_to_syms(ary:)
       ary.map { |num| KEY[num] }
-    end
-
-    def win?
-      return true if @win == true
-
-      false
-    end
-
-    def loss?
-      return @loss = true if @num_guesses > MAX_GUESSES
-
-      false
     end
 
     def add_player

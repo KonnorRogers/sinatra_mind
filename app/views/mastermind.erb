@@ -26,8 +26,12 @@
 
     <div>
       <p class="message" id="bad_input"> <%= message if message == game.bad_input_message %> </p>
-      <p class="message" id="win"> <%= message if message == game.win_message %> </p>
-      <p class="message" id="loss"> <%= message if message == game.loss_message %> </p>
+      <p class="message" id="win"> <%= game.win_message if game.win? %> </p>
+      <p class="message" id="loss"> <%= game.loss_message if game.loss? %> </p>
+    </div>
+
+    <div>
+      <p class="message" id="reset_message"> <%= game.reset_message if reset == true %> </p>
     </div>
 
     <div>
