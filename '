@@ -105,31 +105,22 @@ module SinatraMind
 
     def hints_input(ary:, secret_code: @secret_code)
       ary = convert_to_syms(ary: ary)
-      secret_ary = secret_code.clone
       hints = []
-      indexes = []
+
+      secret_count = s_count_hash(s_code: secret_code)
+      hint_count = Hash.new(0)
 
       4.times do |index|
         if ary[index] == secret_code[index]
           hints << 2
-          indexes << index
-          p index
+          hint_count[ary[index]] += 1
         end
       end
 
-      indexes.reverse.each do |idx|
-        secret_ary.delete_at(idx)
-        ary.delete_at(idx)
+      4.times do |index|
+        hint_count[ary[index]] += 1
+        hints << 1 if hint_count[ary[index]] <= secret_count[secret_code[index]]
       end
-
-      ary.each do |guess|
-        secret_ary.each_with_index do |code, idx|
-          hints << 1 if code == guess
-          secret_ary.delete_at(idx)
-        end
-      end
-      p secret_ary
-      p ary
 
       hints << 0 until hints.size >= 4
       hints
