@@ -83,25 +83,20 @@ module SinatraMind
     end
 
     def key_to_s
-      f_string = ''
-      KEY.each do |num, color|
-        f_string += "#{num} = #{color}, " unless num >= KEY.size
-        f_string += "#{num} = #{color}" if num == KEY.size
-      end
-      f_string
+      KEY.clone
     end
 
     def win_message
-      'Congratulations! You have won! You guessed the secret code correctly'
+      'Congratulations! You have won! You guessed the secret code correctly.
+      The code was: '
     end
 
     def loss_message
-      'You have lost!'
+      'You have lost! The code was:'
     end
 
     def reset_message
-      "The correct code was #{format_s_code}.\n
-      The game will reset with your next guess!"
+      'The game will reset with your next guess!'
     end
 
     def bad_input_message
@@ -116,19 +111,29 @@ module SinatraMind
       hint_count = Hash.new(0)
 
       4.times do |index|
-        hint_count[ary[index]] += 1
+        if ary[index] == secret_code[index]
+          hints << 2
+          hint_count[ary[index]] += 1
+        end
+      end
 
-        hints << if ary[index] == secret_code[index]
-                   2
-                 elsif secret_code.include?(ary[index])
-                   if hint_count[ary[index]] <= secret_count[secret_code[index]]
-                     1
-                   else
-                     0
-                   end
-                 else
-                   0
-                 end
+      4.times do |index|
+        secret_code.include?(ary[index])
+        if hint_count[ary[index]] <= secret_count[secret_code[index]]
+          1
+        else
+          0
+        end
+        hint_count[ary[index]] += 1
+      end
+
+      4.times do |index|
+        secret_code.include?(ary[index])
+        if hint_count[ary[index]] <= secret_count[secret_code[index]]
+          1
+        else
+          0
+        end
       end
 
       hints

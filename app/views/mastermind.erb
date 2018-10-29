@@ -10,9 +10,22 @@
   </head>
   <body>
     <div>
-      <p class="message" id="bad_input"> <%= message if message == game.bad_input_message %> </p>
+      <p class="message" id="bad_input"> <%= game.bad_input_message %> </p>
       <p class="message" id="win"> <%= game.win_message if game.win? %> </p>
       <p class="message" id="loss"> <%= game.loss_message if game.loss? %> </p>
+
+      <p> <% if game.loss? || game.win? %>
+        <% secret_code.each do |color| %>
+        <svg height="26" width="26">
+          <circle cx="13" cy="13" r="11" stroke="black" stroke-width="2" fill=<%= color %> />
+        </svg>
+      <% end %>
+      <% end %>
+      </p>
+    </div>
+
+    <div>
+      <p class="message" id="reset_message"> <%= game.reset_message if reset == true %> </p>
     </div>
 
     <form action="/mastermind" method="get">
@@ -21,41 +34,49 @@
       </div>
       
       <div class="button">
-        <button type="submit" value="input">Submit</button>
+        <button type="submit" value="input">Guess</button>
       </div>
     </form>
 
     <div>
-      <p class="message"> You gave input of: <%= input %> </p>
-    </div>
-
-    <div>
-      <p class="message" id="reset_message"> <%= game.reset_message if reset == true %> </p>
-    </div>
-    
-    <div id="feedback-wrapped">
-      <div class="feedback">
-        <p>Previous guesses:</p>
-        <p> <%= guesses %> </p>
-      </div>
-
-      <div class="feedback">
-        <p id="hints"> Hints:
-        <p> <%= hints %> </p>
-      </div>
+      <p> <% key.each do |num, color| %>
+        <%= "#{num} =" %>
+        <svg height="20" width="20">
+          <circle cx="10" cy="12" r="6" stroke="black" stroke-width="2" fill=<%= color %> />
+        </svg>
+        <%= ";" unless num == key.size %>
+      <% end %>
+      </p>
     </div>
 
     <div>
       <p id="turns_left"> Guesses left: <%= turns_left %> </p>
     </div>
 
-    <div>
-      <p class="key" id="key"> Key: </p>
-      <p> <%= key %> </p>
-    </div>
+    <div id="feedback-wrapped">
+      <div class="feedback">
+        <p>Previous guesses:</p>
+        <% guesses.each do |ary| %>
+          <div> <% ary.each do |cell| %>
+            <svg height="32" width="32">
+              <circle cx="16" cy="16" r="14" stroke="black" stroke-width="2" fill=<%=cell%> />
+            </svg>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
 
-    <div>
-      <p class="feedback" id="secret_code"> Secret code: <%= secret_code %> </p>
+      <div class="feedback">
+        <p id="hints"> Hints:
+        <% hints.each do |ary| %>
+          <div> <% ary.each do |cell| %>
+            <svg height="32" width="32">
+              <circle cx="16" cy="16" r="14" stroke="black" stroke-width="2" fill=<%=cell%> />
+            </svg>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>

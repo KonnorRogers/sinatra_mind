@@ -23,7 +23,7 @@ module SinatraMind
       it 'returns :test and :blank_circle' do
         board.board[:guesses][1][2].value = :test
         expect(board.guess_cell(x: 2, y: 1).value).to eq :test
-        expect(board.guess_cell(x: 0, y: 0).value).to eq :blank_circle
+        expect(board.guess_cell(x: 0, y: 0).value).to eq :white
       end
     end
 
@@ -31,7 +31,7 @@ module SinatraMind
       it 'returns :blank_bullet & :test' do
         board.board[:hints][0][1].value = :test
         expect(board.hint_cell(x: 1, y: 0).value).to eq :test
-        expect(board.hint_cell(x: 0, y: 0).value).to eq :blank_bullet
+        expect(board.hint_cell(x: 0, y: 0).value).to eq :white
       end
     end
 
@@ -41,7 +41,7 @@ module SinatraMind
         expect(board.board[:guesses][1][0].value).to eq :red
         expect(board.guess_cell(x: 0, y: 1).value).to eq :red
         expect(board.guess_cell(x: 1, y: 1).value).to eq :blue
-        expect(board.guess_cell(x: 0, y: 0).value).to eq :blank_circle
+        expect(board.guess_cell(x: 0, y: 0).value).to eq :white
       end
     end
 

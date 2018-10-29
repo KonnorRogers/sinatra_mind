@@ -12,8 +12,8 @@ module SinatraMind
     }.invert.freeze
 
     HINTS = {
-      blank_bullet: 0,
-      white: 1,
+      white: 0,
+      gray: 1,
       black: 2
     }.invert.freeze
   end

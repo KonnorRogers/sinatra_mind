@@ -37,6 +37,14 @@ module SinatraMind
 
         expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
       end
+
+      it 'returns appropriate hints' do
+        secret_code = %i[red blue blue red]
+        input = [1, 1, 1, 1]
+        hints = [2, 0, 0, 2]
+
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+      end
     end
   end
 end

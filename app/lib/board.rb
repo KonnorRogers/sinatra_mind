@@ -61,11 +61,11 @@ module SinatraMind
     private
 
     def d_guesses
-      Array.new(ROWS) { Array.new(COLUMNS) { Cell.new(:blank_circle) } }
+      Array.new(ROWS) { Array.new(COLUMNS) { Cell.new(:white) } }
     end
 
     def d_hints
-      Array.new(ROWS) { Array.new(COLUMNS) { Cell.new(:blank_bullet) } }
+      Array.new(ROWS) { Array.new(COLUMNS) { Cell.new(:white) } }
     end
   end
 end
