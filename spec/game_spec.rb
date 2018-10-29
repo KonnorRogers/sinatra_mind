@@ -19,7 +19,7 @@ module SinatraMind
         input = [1, 2, 3, 1]
         hints = [2, 0, 0, 2]
 
-        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to eq hints
       end
 
       it 'returns hints again' do
@@ -27,7 +27,7 @@ module SinatraMind
         input = [2, 3, 5, 5]
         hints = [1, 0, 2, 2]
 
-        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to eq hints
       end
 
       it 'more tests' do
@@ -35,7 +35,7 @@ module SinatraMind
         input = [2, 5, 5, 2]
         hints = [1, 1, 0, 1]
 
-        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to eq hints
       end
 
       it 'returns appropriate hints' do
@@ -43,7 +43,7 @@ module SinatraMind
         input = [1, 1, 1, 1]
         hints = [2, 0, 0, 2]
 
-        expect(game.hints_input(ary: input, secret_code: secret_code)).to match_array hints
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to eq hints
       end
     end
   end
