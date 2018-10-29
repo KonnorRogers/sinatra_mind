@@ -108,31 +108,6 @@ module SinatraMind
       secret_ary = secret_code.clone
       hints = []
 
-#       indexes = []
-#
-#       4.times do |index|
-#         if ary[index] == secret_code[index]
-#           hints << 2
-#           indexes << index
-#           p index
-#         end
-#       end
-#
-#       indexes.reverse.each do |idx|
-#         secret_ary.delete_at(idx)
-#         ary.delete_at(idx)
-#       end
-#
-#       ary.each do |guess|
-#         secret_ary.each_with_index do |code, idx|
-#           hints << 1 if code == guess
-#           secret_ary.delete_at(idx)
-#         end
-#       end
-#       p secret_ary
-#       p ary
-
-      hints << 0 until hints.size >= 4
       hints
     end
 
