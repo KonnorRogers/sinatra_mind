@@ -106,10 +106,34 @@ module SinatraMind
     def hints_input(ary:, secret_code: @secret_code)
       ary = convert_to_syms(ary: ary)
       ary_count = Hash.new(0)
-      ary.each { |v| ary_count[v] += 1 }
-      secret_ary = secret_code.clone
-      hints = []
 
+      secret_code = secret_code.clone
+      secret_count = s_count_hash(s_code: secret_code)
+
+      hints = []
+      indexes = []
+
+      4.times do |idx|
+        if ary[idx] == secret_code[idx]
+          hints << 2
+          ary_count[ary[idx]] += 1
+          indexes << idx
+        end
+      end
+
+      indexes.reverse_each do |idx|
+        ary.delete_at(idx)
+        secret_code.delete_at(idx)
+      end
+
+      4.times do |idx|
+       if secret_code.include?(ary[idx]) && secret_count[ary[idx]] > ary_count[ary[idx]]
+          hints << 1
+          ary_count[ary[idx]] += 1
+        end
+      end
+
+      hints << 0 until hints.size >= 4
       hints
     end
 
