@@ -105,6 +105,8 @@ module SinatraMind
 
     def hints_input(ary:, secret_code: @secret_code)
       ary = convert_to_syms(ary: ary)
+      ary_count = Hash.new(0)
+      ary.each { |v| ary_count[v] += 1 }
       secret_ary = secret_code.clone
       hints = []
 
