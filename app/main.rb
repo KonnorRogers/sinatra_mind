@@ -31,7 +31,7 @@ get '/mastermind' do
   guesses = game.guesses_to_s.reverse
   turns_left = SinatraMind::Game::MAX_GUESSES - game.num_guesses
   key = game.key_to_s
-  h_key = game.h_key.to_s
+  h_key = game.h_key_to_s
   hints = game.hints_to_s.reverse
   # used to display reset message, must be checked after the turn is taken.
   reset = true if game.win? || game.loss?
