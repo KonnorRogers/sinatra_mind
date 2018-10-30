@@ -135,7 +135,6 @@ module SinatraMind
       end
 
       hints.each do |idx, value|
-        p hints_a
         hints_a[idx] = value
       end
 

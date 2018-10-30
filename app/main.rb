@@ -8,7 +8,10 @@ require 'thin'
 require_relative 'sinatra_mind'
 
 enable :sessions
-set :views, settings.root + '/app/views'
+
+DIR_PATH = File.dirname(__FILE__)
+set :views, DIR_PATH + '/views'
+set :public_folder, DIR_PATH + '/public'
 
 get '/' do
   redirect '/mastermind'
