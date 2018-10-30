@@ -91,6 +91,18 @@ module SinatraMind
       H_KEY.clone
     end
 
+    def hint_0
+      ' = No relevance'
+    end
+
+    def hint_1
+      ' = Right color, wrong spot'
+    end
+
+    def hint_2
+      ' = Right color and spot'
+    end
+
     def win_message
       'Congratulations! You have won! You guessed the secret code correctly.
       The code was: '

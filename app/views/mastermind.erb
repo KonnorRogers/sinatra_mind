@@ -54,10 +54,14 @@
     </div>
 
     <div>
-      <p> <% h_key do |num, color| %>
-        
+      <% h_key do |num, color| %>
+        <p> 
         <svg height="20" width="20">
           <circle cx="10" cy="12" r="6" stroke="black" stroke-width="2" fill=<%= color %> />
+          <%= game.hint_0 if num == 0 %>
+          <%= game.hint_1 if num == 1 %>
+          <%= game.hint_2 if num == 2 %>
+        </p>
     </div>
 
     <div id="feedback-wrapped">
