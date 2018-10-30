@@ -8,6 +8,7 @@ require 'thin'
 require_relative 'sinatra_mind'
 
 enable :sessions
+set :views, settings.root + '/app/views'
 
 get '/' do
   redirect '/mastermind'
