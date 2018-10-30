@@ -6,6 +6,7 @@ module SinatraMind
   class Game
     MAX_GUESSES = 12
     KEY = Colors::COLORS
+    H_KEY = Colors::HINTS
 
     attr_reader :player, :num_guesses, :secret_code,
                 :board, :colors, :win, :loss
@@ -86,6 +87,10 @@ module SinatraMind
       KEY.clone
     end
 
+    def h_key_to_s
+      H_KEY.clone
+    end
+
     def win_message
       'Congratulations! You have won! You guessed the secret code correctly.
       The code was: '
@@ -115,11 +120,11 @@ module SinatraMind
       indexes = []
 
       4.times do |idx|
-        if ary[idx] == secret_code[idx]
-          hints[idx] = 2
-          ary_count[ary[idx]] += 1
-          indexes << idx
-        end
+        next unless ary[idx] == secret_code[idx]
+
+        hints[idx] = 2
+        ary_count[ary[idx]] += 1
+        indexes << idx
       end
 
       indexes.reverse_each do |idx|
@@ -128,7 +133,7 @@ module SinatraMind
       end
 
       4.times do |idx|
-       if secret_code.include?(ary[idx]) && secret_count[ary[idx]] > ary_count[ary[idx]]
+        if secret_code.include?(ary[idx]) && secret_count[ary[idx]] > ary_count[ary[idx]]
           hints[idx] = 1
           ary_count[ary[idx]] += 1
         end
