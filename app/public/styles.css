@@ -6,6 +6,12 @@ body {
   text-align: center
 }
 
+.hints {
+  margin: 0 auto;
+  width: 14em;
+  text-align: left;
+}
+
 #feedback-wrapped {
   position: relative;
 }
