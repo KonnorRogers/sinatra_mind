@@ -110,12 +110,13 @@ module SinatraMind
       secret_code = secret_code.clone
       secret_count = s_count_hash(s_code: secret_code)
 
-      hints = []
+      hints = {}
+      hints_a = Array.new(4) { 0 }
       indexes = []
 
       4.times do |idx|
         if ary[idx] == secret_code[idx]
-          hints << 2
+          hints[idx] = 2
           ary_count[ary[idx]] += 1
           indexes << idx
         end
@@ -128,13 +129,17 @@ module SinatraMind
 
       4.times do |idx|
        if secret_code.include?(ary[idx]) && secret_count[ary[idx]] > ary_count[ary[idx]]
-          hints << 1
+          hints[idx] = 1
           ary_count[ary[idx]] += 1
         end
       end
 
-      hints << 0 until hints.size >= 4
-      hints
+      hints.each do |idx, value|
+        p hints_a
+        hints_a[idx] = value
+      end
+
+      hints_a
     end
 
     def s_count_hash(s_code:)
