@@ -3,6 +3,7 @@
 <p> This is the repo for the game mastermind. I created as part of TheOdinProject </p>
 
 <p> Link to web app: </p>
+
 [Mastermind Game](https://immense-mesa-98857.herokuapp.com/mastermind)
 
 # Usage
