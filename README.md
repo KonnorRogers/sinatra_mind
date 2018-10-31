@@ -2,7 +2,8 @@
 
 <p> This is the repo for the game mastermind. I created as part of TheOdinProject </p>
 
-<p> Link to web app: [Mastermind Game](https://immense-mesa-98857.herokuapp.com/mastermind) </p>
+<p> Link to web app: </p>
+[Mastermind Game](https://immense-mesa-98857.herokuapp.com/mastermind)
 
 # Usage
 
@@ -41,6 +42,11 @@
 # Issues
 
 <p> No issues noted at this time. Possibly CSS issues related to browser support </p>
+
+# Future Development
+
+<p> Adding in Rake tasks that actually do stuff </p>
+<p> Adding in Procfile for heroku rather than letting heroku default it </p>
 
 # Contact Info
 
