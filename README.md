@@ -6,6 +6,8 @@
 
 [Mastermind Game](https://immense-mesa-98857.herokuapp.com/mastermind)
 
+![Game screenshot](https://github.com/ParamagicDev/sinatra_mind/blob/master/screenshot.png)
+
 # Usage
 
 <p> This is merely a repo, there is a command w/ in app/lib/game.rb should you clone this repo </p>
