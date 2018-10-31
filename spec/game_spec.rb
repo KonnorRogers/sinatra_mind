@@ -45,6 +45,14 @@ module SinatraMind
 
         expect(game.hints_input(ary: input, secret_code: secret_code)).to eq hints
       end
+
+      it 'returns appropriately' do
+        secret_code = %i[red yellow yellow blue]
+        input = [1, 2, 3, 4]
+        hints = [2, 1, 0, 0]
+
+        expect(game.hints_input(ary: input, secret_code: secret_code)).to eq hints
+      end
     end
   end
 end

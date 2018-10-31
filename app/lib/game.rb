@@ -139,10 +139,15 @@ module SinatraMind
         indexes << idx
       end
 
+      p indexes
+
       indexes.reverse_each do |idx|
         ary.delete_at(idx)
         secret_code.delete_at(idx)
       end
+
+      p secret_code
+      p ary
 
       4.times do |idx|
         if secret_code.include?(ary[idx]) && secret_count[ary[idx]] > ary_count[ary[idx]]
